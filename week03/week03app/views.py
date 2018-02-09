@@ -3,8 +3,12 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 import datetime
+from .models import Person
+from .forms import PersonForm
+from django.views.generic.edit import CreateView
 
-def current_datetime(request):
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
-    return HttpResponse(html)
+class CreatePersonView(CreateView):
+	queryset = Person()
+	template_name='create.html'
+	form_class = PersonForm
+	success_url = '/list'
