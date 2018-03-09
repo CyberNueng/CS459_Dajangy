@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from rent import views
+from rent.serializers import routers
+
+router = routers.DefaultRouter()
+router.register(r'customer', views.CustomerViewSet)
 
 urlpatterns = [
+    url(r'api/', include(router.urls)),
     path('admin/', admin.site.urls),
     path('', views.CarListView.as_view(), name='carlist')
 ]
