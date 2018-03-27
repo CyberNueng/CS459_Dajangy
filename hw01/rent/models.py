@@ -14,12 +14,19 @@ class Customer(models.Model):
 	first_name=models.CharField(max_length=100)
 	last_name=models.CharField(max_length=100)
 	phone=models.CharField(max_length=20)
+
+	class Meta:
+		verbose_name = 'Customer'
+		verbose_name_plural = 'Customers'
+
 	def __str__(self):
 		return "id: {}, {}".format(self.id, self.first_name)
+	
+
 
 class Rent(models.Model):
 	customer=models.ForeignKey(Customer, on_delete=models.CASCADE)
 	car=models.ForeignKey(Car, on_delete=models.CASCADE)
-	start=models.DateTimeField()
-	stop=models.DateTimeField()
+	start=models.DateTimeField(auto_now_add=True)
+	stop=models.DateTimeField(blank=True)
 	fee=models.DecimalField(max_digits=10,decimal_places=2)

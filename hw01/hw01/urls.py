@@ -14,7 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from rent import views
@@ -22,9 +21,12 @@ from rent.serializers import routers
 
 router = routers.DefaultRouter()
 router.register(r'customer', views.CustomerViewSet)
+router.register(r'car', views.CarViewSet)
+router.register(r'rent', views.RentViewSet)
 
 urlpatterns = [
     url(r'api/', include(router.urls)),
-    path('admin/', admin.site.urls),
-    path('', views.CarListView.as_view(), name='carlist')
+    url('admin/', admin.site.urls),
+    #url('list/', views.CarListView.as_view(), name='carlist'),
+    #url('', views.HomeView.as_view(), name='home')
 ]
