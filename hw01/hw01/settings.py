@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'bootstrap4',
     'rest_framework',
     'django_extensions',
+    'social_django',
+    'tuauth',
 ]
 
 MIDDLEWARE = [
@@ -103,6 +105,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'tuauth.backend.TUOAuth2',
+)
+
+SOCIAL_AUTH_TU_KEY = 'QmKjsZBwt7dZgmrQ1EghQb7SBwkjBcJKTEMKQ6lT'
+SOCIAL_AUTH_TU_SECRET = 'ducEsIxRNYsKygRDRKAJRg622cJ0jp70zoQPwnnhbAMMrV8FYozO2UHB0hqBbu8GHtS8fCMnHltsXIHGFglRuYxjtXKJvgkPMIHnmcDM5VWQTkyciFqDU1NIlGv2xwkQ'
+
+SOCIAL_AUTH_PIPELINE = [ 
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'social_core.pipeline.social_auth.associate_by_email',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/

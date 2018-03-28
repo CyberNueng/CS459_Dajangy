@@ -27,6 +27,7 @@ router.register(r'rent', views.RentViewSet)
 urlpatterns = [
     url(r'api/', include(router.urls)),
     url('admin/', admin.site.urls),
+    url('oauth/', include('social_django.urls', namespace='social')),
     #url('list/', views.CarListView.as_view(), name='carlist'),
-    #url('', views.HomeView.as_view(), name='home')
+    url('', views.HomeView.as_view(), name='home')
 ]
